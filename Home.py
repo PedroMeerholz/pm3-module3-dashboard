@@ -1,11 +1,13 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from ColumnValueReplacer import ColumnValueReplacer
+from utils.ColumnValueReplacer import ColumnValueReplacer
 
-st.set_page_config(layout='wide')
+PAGE_TITLE = 'Vendas dos Clientes Amazon e Amazon Prime'
 
-st.title('Análise Amazon')
+st.set_page_config(layout='wide', page_title=PAGE_TITLE)
+
+st.title(PAGE_TITLE)
 buys_by_user = pd.read_csv('D:/Projects/pm3-module3-dashboard/data/Vendas Amazon - Compras por usuário.csv')
 buys_by_user = buys_by_user[['ID Usuário', 'Nome', 'Valor Gasto', 'Número de compras ', 'Estado', 'Assinantes', 'Idade']]
 buys_by_user['Valor Gasto'] = ColumnValueReplacer.replace_value_from_column(buys_by_user['Valor Gasto'], 'R$ ', '')
@@ -25,10 +27,8 @@ total_buys_by_user_category = pd.DataFrame(data={
     'Número de Compras': [subscribers_buys['Número de compras '].sum(), not_subscribers_buys['Número de compras '].sum()]
 })
 
-left_column, right_column = st.columns(2)
-
 spent_value_by_user_category_bar_plot = px.bar(spent_value_by_user_category, x='Categoria Cliente', y='Valor Gasto', title='Valor total gasto (R$)')
-left_column.plotly_chart(spent_value_by_user_category_bar_plot)
+st.plotly_chart(spent_value_by_user_category_bar_plot)
 
 total_buys_by_user_category_bar_plot = px.bar(total_buys_by_user_category, x='Categoria Cliente', y='Número de Compras', title='Quantidade de compras')
-right_column.plotly_chart(total_buys_by_user_category_bar_plot)
+st.plotly_chart(total_buys_by_user_category_bar_plot)
