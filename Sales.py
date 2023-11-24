@@ -3,11 +3,8 @@ import pandas as pd
 import plotly.express as px
 from utils.ColumnValueReplacer import ColumnValueReplacer
 
-PAGE_TITLE = 'Vendas dos Clientes Amazon e Amazon Prime'
+st.set_page_config(layout='wide', page_title='Vendas dos Clientes Amazon e Amazon Prime')
 
-st.set_page_config(layout='wide', page_title=PAGE_TITLE)
-
-st.title(PAGE_TITLE)
 buys_by_user = pd.read_csv('D:/Projects/pm3-module3-dashboard/data/Vendas Amazon - Compras por usuário.csv')
 buys_by_user = buys_by_user[['ID Usuário', 'Nome', 'Valor Gasto', 'Número de compras ', 'Estado', 'Assinantes', 'Idade']]
 buys_by_user['Valor Gasto'] = ColumnValueReplacer.replace_value_from_column(buys_by_user['Valor Gasto'], 'R$ ', '')
