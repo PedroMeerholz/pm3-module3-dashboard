@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 from utils.InvoicingFilter import InvoicingFilter
 from utils.InvoicingFormatter import InvoicingFormatter
 from utils.MonthSelectBox import MonthSelectBox
@@ -9,7 +10,7 @@ st.set_page_config(layout='wide', page_title='Faturamento Amazon')
 formatter = InvoicingFormatter()
 year_filter = InvoicingFilter()
 
-invoicing = pd.read_csv('D:/Projects/pm3-module3-dashboard/data/Vendas Amazon - Faturamento Amazon.csv')
+invoicing = pd.read_csv(os.path.abspath('.') + '/data/Vendas Amazon - Faturamento Amazon.csv')
 invoicing.columns = ['Mês/Ano', 'Faturamento', 'Número de pedidos', 'Número de clientes', 'Tickét Médio']
 invoicing['Mês/Ano'] = formatter.format_date_column(invoicing['Mês/Ano'].unique(), remove_day=False)
 invoicing['Faturamento'] = formatter.format_invoicing_column(invoicing_list=invoicing['Faturamento'])

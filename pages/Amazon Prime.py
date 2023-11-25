@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 from utils.InvoicingFilter import InvoicingFilter
 from utils.InvoicingFormatter import InvoicingFormatter
 from utils.MonthSelectBox import MonthSelectBox
@@ -9,7 +10,7 @@ st.set_page_config(layout='wide', page_title='Clientes Amazon Prime')
 formatter = InvoicingFormatter()
 year_filter = InvoicingFilter()
 
-prime_users = pd.read_csv('D:/Projects/pm3-module3-dashboard/data/Vendas Amazon - Clientes Amazon Prime.csv')
+prime_users = pd.read_csv(os.path.abspath('.') + '/data/Vendas Amazon - Clientes Amazon Prime.csv')
 prime_users.columns = ['Mês/Ano', 'Novos Clientes', 'Clientes existentes', 'Clientes Ativos', 'Faturamento']
 prime_users['Mês/Ano'] = formatter.format_date_column(month_list=prime_users['Mês/Ano'], remove_day=True)
 prime_users['Faturamento'] = formatter.format_invoicing_column(invoicing_list=prime_users['Faturamento'])
