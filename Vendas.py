@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 from utils.ColumnValueReplacer import ColumnValueReplacer
 
 st.set_page_config(layout='wide', page_title='Vendas dos Clientes Amazon e Amazon Prime')
@@ -26,8 +25,9 @@ total_buys_by_user_category = pd.DataFrame(data={
 
 st.title('Vendas')
 
-spent_value_by_user_category_bar_plot = px.bar(spent_value_by_user_category, x='Categoria Cliente', y='Valor Gasto', title='Valor total gasto (R$)')
-st.plotly_chart(spent_value_by_user_category_bar_plot)
+total_spent_column, total_buys_column = st.columns(2)
 
-total_buys_by_user_category_bar_plot = px.bar(total_buys_by_user_category, x='Categoria Cliente', y='Número de Compras', title='Quantidade de compras')
-st.plotly_chart(total_buys_by_user_category_bar_plot)
+with total_spent_column:
+    st.bar_chart(data=spent_value_by_user_category, x='Categoria Cliente', y='Valor Gasto')
+with total_buys_column:
+    st.bar_chart(data=total_buys_by_user_category, x='Categoria Cliente', y='Número de Compras')
