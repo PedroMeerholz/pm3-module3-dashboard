@@ -4,7 +4,7 @@ from utils.InvoicingFilter import InvoicingFilter
 from utils.InvoicingFormatter import InvoicingFormatter
 from utils.MonthSelectBox import MonthSelectBox
 
-st.set_page_config(layout='wide', page_title='Faturamento e Tickét Médio')
+st.set_page_config(layout='wide', page_title='Faturamento Amazon')
 
 formatter = InvoicingFormatter()
 year_filter = InvoicingFilter()
@@ -14,6 +14,8 @@ invoicing.columns = ['Mês/Ano', 'Faturamento', 'Número de pedidos', 'Número d
 invoicing['Mês/Ano'] = formatter.format_date_column(invoicing['Mês/Ano'].unique(), remove_day=False)
 invoicing['Faturamento'] = formatter.format_invoicing_column(invoicing_list=invoicing['Faturamento'])
 invoicing['Tickét Médio'] = formatter.format_ticket_column(invoicing['Tickét Médio'])
+
+st.title('Visão Geral Amazon')
 
 selected_year = MonthSelectBox.build(invoicing['Mês/Ano'])
 filtered_invoicing = year_filter.filter_invoicing_by_year(invoicing, selected_year) \

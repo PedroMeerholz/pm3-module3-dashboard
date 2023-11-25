@@ -24,6 +24,8 @@ total_buys_by_user_category = pd.DataFrame(data={
     'Número de Compras': [subscribers_buys['Número de compras '].sum(), not_subscribers_buys['Número de compras '].sum()]
 })
 
+st.title('Vendas')
+
 spent_value_by_user_category_bar_plot = px.bar(spent_value_by_user_category, x='Categoria Cliente', y='Valor Gasto', title='Valor total gasto (R$)')
 st.plotly_chart(spent_value_by_user_category_bar_plot)
 

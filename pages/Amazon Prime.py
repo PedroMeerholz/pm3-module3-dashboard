@@ -14,6 +14,8 @@ prime_users.columns = ['Mês/Ano', 'Novos Clientes', 'Clientes existentes', 'Cli
 prime_users['Mês/Ano'] = formatter.format_date_column(month_list=prime_users['Mês/Ano'], remove_day=True)
 prime_users['Faturamento'] = formatter.format_invoicing_column(invoicing_list=prime_users['Faturamento'])
 
+st.title('Visão Geral Amazon Prime')
+
 selected_year = MonthSelectBox.build(prime_users['Mês/Ano'])
 filtered_users = year_filter.filter_invoicing_by_year(prime_users, selected_year) \
     if selected_year != 'Todo o período' else prime_users
